@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parkinson's Disease Detection System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>PD Detection System</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#prediction" class="nav-link">Prediction</a></li>
+                <li><a href="#info" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Parkinson's Disease Detection</h1>
+            <p>Advanced AI-Powered Diagnosis System Using Voice Analysis</p>
+            <button class="btn btn-primary" onclick="document.getElementById('prediction').scrollIntoView({behavior: 'smooth'})">
+                Start Prediction
+            </button>
+        </div>
+        <div class="hero-bg"></div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Information Section -->
+        <section id="info" class="info-section">
+            <h2>About Parkinson's Disease</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>What is Parkinson's?</h3>
+                    <p>A progressive nervous system disorder affecting movement. Early detection is crucial for better treatment outcomes.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-microphone"></i>
+                    <h3>Voice Analysis</h3>
+                    <p>Our system analyzes voice features and speech patterns to detect characteristics associated with Parkinson's disease.</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-flask"></i>
+                    <h3>ML Technology</h3>
+                    <p>Uses advanced machine learning algorithms trained on extensive medical voice datasets for accurate predictions.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prediction Section -->
+        <section id="prediction" class="prediction-section">
+            <h2>Parkinson's Prediction System</h2>
+            
+            <div class="prediction-container">
+                <!-- Input Form -->
+                <div class="prediction-form-container">
+                    <h3>Enter Voice Features</h3>
+                    
+                    <!-- Feature Input Tabs -->
+                    <div class="feature-tabs">
+                        <button class="tab-btn active" data-tab="basic">Basic Features</button>
+                        <button class="tab-btn" data-tab="advanced">Advanced Features</button>
+                        <button class="tab-btn" data-tab="nonlinear">Nonlinear Features</button>
+                    </div>
+
+                    <!-- Basic Features -->
+                    <div id="basic" class="tab-content active">
+                        <div class="feature-group">
+                            <h4>Frequency Features</h4>
+                            <div class="input-row">
+                                <div class="input-field">
+                                    <label>MDVP:Fo(Hz)</label>
+                                    <input type="number" id="MDVP:Fo(Hz)" step="0.001" placeholder="150-250">
+                                    <small>Average vocal fundamental frequency</small>
+                                </div>
+                                <div class="input-field">
+                                    <label>MDVP:Fhi(Hz)</label>
+                                    <input type="number" id="MDVP:Fhi(Hz)" step="0.001" placeholder="200-350">
+                                    <small>Maximum vocal fundamental frequency</small>
+                                </div>
+                            </div>
+                            <div class="input-row">
+                                <div class="input-field">
+                                    <label>MDVP:Flo(Hz)</label>
+                                    <input type="number" id="MDVP:Flo(Hz)" step="0.001" placeholder="50-150">
+                                    <small>Minimum vocal fundamental frequency</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="feature-group">
+                            <h4>Jitter Features</h4>
+                            <div class="input-row">
+                                <div class="input-field">
+                                    <label>MDVP:Jitter(%)</label>
+                                    <input type="number" id="MDVP:Jitter(%)" step="0.0001" placeholder="0.0-5.0">
+                                    <small>Variation in frequency (%)</small>
+                                </div>
+                                <div class="input-field">
+                                    <label>MDVP:Jitter(Abs)</label>
+                                    <input type="number" id="MDVP:Jitter(Abs)" step="0.00001" placeholder="0.0-0.1">
+                                    <small>Variation in frequency (absolute)</small>
+                                </div>
+                            </div>
+                            <div class="input-row">
+                                <div class="input-field">
+                                    <label>MDVP:RAP</label>
+                                    <input type="number" id="MDVP:RAP" step="0.0001" placeholder="0.0-2.0">
+                                    <small>Relative amplitude perturbation</small>
+                                </div>
+                                <div class="input-field">
+                                    <label>MDVP:PPQ</label>
+                                    <input type="number" id="MDVP:PPQ" step="0.0001" placeholder="0.0-2.0">
+                                    <small>Pitch perturbation quotient</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="feature-group">
+                            <h4>Shimmer Features</h4>
+                            <div class="input-row">
+                                <div class="input-field">
+                                    <label>MDVP:Shimmer</label>
+                                    <input type="number" id="MDVP:Shimmer" step="0.001" placeholder="0.0-30.0">
+                                    <small>Variation in amplitude (%)</small>
+                                </div>
+                                <div class="input-field">
+                                    <label>MDVP:Shimmer(dB)</label>
+                                    <input type="number" id="MDVP:Shimmer(dB)" step="0.01" placeholder="0.0-5.0">
+                                    <small>Variation in amplitude (dB)</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Features -->
+                    <div id="advanced" class="tab-content">
+                        <div class="feature-group">
+                            <h4>Advanced Perturbation Measures</h4>
+                            <div class="input-row">
+                                <div class="input-field">
+                                    <label>Shimmer:APQ3</label>
+                                    <input type="number" id="Shimmer:APQ3" step="0.0001" placeholder="0.0-1.0">
+                                    <small>Amplitude perturbation quotient (3)</small>
+                                </div>
+                                <div class="input-field">
+                                    <label>Shimmer:APQ5</label>
+                                    <input type="number" id="Shimmer:APQ5" step="0.0001" placeholder="0.0-1.0">
+                                    <small>Amplitude perturbation quotient (5)</small>
+                                </div>
+                            </div>
+                            <div class="input-row">
+                                <div class="input-field">
+                                    <label>MDVP:APQ</label>
+                                    <input type="number" id="MDVP:APQ" step="0.0001" placeholder="0.0-1.0">
+                                    <small>Amplitude perturbation quotient</small>
+                                </div>
+                                <div class="input-field">
+                                    <label>Shimmer:DDA</label>
+                                    <input type="number" id="Shimmer:DDA" step="0.0001" placeholder="0.0-1.0">
+                                    <small>Differential amplitude perturbation</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="feature-group">
+                            <h4>Noise and Harmonic Measures</h4>
+                            <div class="input-row">
+                                <div class="input-field">
+                                    <label>NHR</label>
+                                    <input type="number" id="NHR" step="0.0001" placeholder="0.0-0.5">
+                                    <small>Noise-to-harmonics ratio</small>
+                                </div>
+                                <div class="input-field">
+                                    <label>HNR</label>
+                                    <input type="number" id="HNR" step="0.01" placeholder="10-40">
+                                    <small>Harmonics-to-noise ratio</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="feature-group">
+                            <h4>Jitter DDP</h4>
+                            <div class="input-row">
+                                <div class="input-field">
+                                    <label>Jitter:DDP</label>
+                                    <input type="number" id="Jitter:DDP" step="0.0001" placeholder="0.0-5.0">
+                                    <small>Differential jitter</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nonlinear Features -->
+                    <div id="nonlinear" class="tab-content">
+                        <div class="feature-group">
+                            <h4>Nonlinear Dynamical Measures</h4>
+                            <div class="input-row">
+                                <div class="input-field">
+                                    <label>RPDE</label>
+                                    <input type="number" id="RPDE" step="0.0001" placeholder="0.2-1.0">
+                                    <small>Recurrence period density entropy</small>
+                                </div>
+                                <div class="input-field">
+                                    <label>DFA</label>
+                                    <input type="number" id="DFA" step="0.0001" placeholder="0.5-1.0">
+                                    <small>Detrended fluctuation analysis</small>
+                                </div>
+                            </div>
+                            <div class="input-row">
+                                <div class="input-field">
+                                    <label>spread1</label>
+                                    <input type="number" id="spread1" step="0.01" placeholder="-20-0">
+                                    <small>Nonlinear measure spread1</small>
+                                </div>
+                                <div class="input-field">
+                                    <label>spread2</label>
+                                    <input type="number" id="spread2" step="0.0001" placeholder="0.0-1.0">
+                                    <small>Nonlinear measure spread2</small>
+                                </div>
+                            </div>
+                            <div class="input-row">
+                                <div class="input-field">
+                                    <label>D2</label>
+                                    <input type="number" id="D2" step="0.0001" placeholder="1.0-4.0">
+                                    <small>Correlation dimension</small>
+                                </div>
+                                <div class="input-field">
+                                    <label>PPE</label>
+                                    <input type="number" id="PPE" step="0.0001" placeholder="0.0-1.0">
+                                    <small>Pitch period entropy</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="feature-group">
+                            <h4>Status</h4>
+                            <div class="input-row">
+                                <div class="input-field">
+                                    <label>Status (Reference)</label>
+                                    <select id="status">
+                                        <option value="0">0 - Healthy</option>
+                                        <option value="1">1 - Parkinson's Disease</option>
+                                    </select>
+                                    <small>Ground truth label (if known)</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="button-group">
+                        <button class="btn btn-primary" onclick="makePrediction()">
+                            <i class="fas fa-brain"></i> Predict
+                        </button>
+                        <button class="btn btn-secondary" onclick="loadSampleData()">
+                            <i class="fas fa-database"></i> Load Sample
+                        </button>
+                        <button class="btn btn-tertiary" onclick="clearForm()">
+                            <i class="fas fa-times"></i> Clear
+                        </button>
+                    </div>
+
+                    <!-- Loading Indicator -->
+                    <div id="loading" class="loading" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>Processing prediction...</p>
+                    </div>
+                </div>
+
+                <!-- Results Panel -->
+                <div class="results-container">
+                    <div id="results" class="results" style="display: none;">
+                        <h3>Prediction Results</h3>
+                        
+                        <div class="result-box" id="result-status">
+                            <div class="status-indicator" id="status-indicator"></div>
+                            <div>
+                                <p class="result-label">Diagnosis</p>
+                                <p class="result-value" id="diagnosis-result">-</p>
+                            </div>
+                        </div>
+
+                        <div class="confidence-meter">
+                            <p class="result-label">Confidence Level</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="confidence-fill" style="width: 0%">
+                                    <span class="progress-text" id="confidence-text">0%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="probability-chart">
+                            <p class="result-label">Probability Distribution</p>
+                            <div class="prob-item">
+                                <span>Healthy</span>
+                                <div class="prob-bar">
+                                    <div class="prob-fill healthy" id="prob-healthy" style="width: 0%">
+                                        <span id="prob-healthy-text">0%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="prob-item">
+                                <span>Parkinson's Disease</span>
+                                <div class="prob-bar">
+                                    <div class="prob-fill parkinsons" id="prob-parkinsons" style="width: 0%">
+                                        <span id="prob-parkinsons-text">0%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="warning-box">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <p><strong>Important:</strong> This is a prediction model for educational purposes. Please consult a qualified healthcare professional for actual medical diagnosis.</p>
+                        </div>
+
+                        <div class="timestamp">
+                            <small>Prediction Time: <span id="pred-time">-</span></small>
+                        </div>
+                    </div>
+
+                    <div id="no-results" class="no-results">
+                        <i class="fas fa-chart-bar"></i>
+                        <p>Fill in the voice features and click "Predict" to see results here</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Explanation -->
+        <section class="features-info">
+            <h2>Feature Descriptions</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4>Frequency Features</h4>
+                    <p>Measures of fundamental frequency (F0) which represent the base frequency of vocal vibrations.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Perturbation Features</h4>
+                    <p>Measures of variations in frequency (jitter) and amplitude (shimmer) of the voice signal.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Nonlinear Features</h4>
+                    <p>Complex measures derived from signal processing including entropy and correlation dimensions.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Harmonic Features</h4>
+                    <p>Ratios of harmonic to noise content in the voice, indicating voice quality.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <h2>Contact & Support</h2>
+            <div class="contact-info">
+                <p><strong>For Medical Concerns:</strong> Please consult a qualified neurologist or healthcare professional.</p>
+                <p><strong>For Technical Support:</strong> Contact the development team.</p>
+                <p><strong>Dataset Source:</strong> University of California, Irvine (UCI) Machine Learning Repository</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 Parkinson's Disease Detection System. All rights reserved.</p>
+            <p>Built with <i class="fas fa-heart"></i> for healthcare innovation.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
